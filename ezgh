@@ -4,11 +4,11 @@
 
 if [[ $# -ge 1 ]] && [[ $1 = "-h" ]]
 then
-	echo "ezgh : macros to manage GitHub repositories in a single command"
+	echo -e "\nezgh : macros to manage GitHub repositories in a single command"
 	echo "usage : ezgh <option> <args>"
 	echo "available options : "
 	echo "	-p <msg> pushes the current repo to main, with <msg> as the commit message"
-	echo "	-b <name> creates a new branch with <name> as the branche's name"
+	echo -e "	-b <name> creates a new branch with <name> as the branche's name\n"
 	exit 0
 fi
 
@@ -19,7 +19,7 @@ then
 		git add .
 		git commit -m "${2}"
 		git push origin main
-		echo "Successfully pushed current repo to main !"
+		echo -e "\nSuccessfully pushed current repo to main branch"
 		exit 0
 	fi
 
@@ -32,15 +32,15 @@ then
 			git add .
 			git commit -m "ezgh : created branch ${2} and synced local repo to GitHub"
 			git push origin $2
-			echo "Successfully created branch ${2}"
+			echo -e "branch ${2} successfully created !"
 		else
-    		echo "ezgh : a branch with that name already exists !!"
+    		echo -e "\nezgh : a branch with that name already exists !!\n"
     		exit 1
 		fi
-	exit 0
+		exit 0
 	fi
 fi
 
-echo "ezgh : this command was not formatted correctly"
-echo "use \"ezgh -h\" to see all possible arguments"
+echo -e "\nezgh : this command was not formatted correctly"
+echo -e "use \"ezgh -h\" to see all possible arguments\n"
 exit 1
