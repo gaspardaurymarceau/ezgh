@@ -1,0 +1,14 @@
+#! /bin/bash
+
+if [[ $# -le 1 ]]
+then
+echo "ezgh : "
+echo "You can use \"ezgh -h\" to display a help page"
+exit 1
+else
+	if [[ $# -eq 1 ]]
+	git add .
+	git commit -m "${1}"
+	git push origin main
+fi
+exit 0

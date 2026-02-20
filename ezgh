@@ -1,0 +1,44 @@
+#! /usr/bin/env bash
+
+
+
+if [[ $# -ge 1 ]] && [[ $1 = "-h" ]]
+then
+	echo "ezgh : macros to manage GitHub repositories in a single command"
+	echo "usage : ezgh <option> <args>"
+	echo "available options : "
+	echo "	-p <msg> pushes the current repo to main, with <msg> as the commit message"
+	echo "	-b <name> creates a new branch with <name> as the branche's name"
+	exit 0
+fi
+
+if [[ $# -eq 2 ]]
+then
+	if [[ $1 = "-p" ]]
+	then
+		git add .
+		git commit -m "${2}"
+		git push origin main
+		exit 0
+	fi
+
+	if [[ $1 = "-b" ]]
+	then
+		git branch -a | if [[ $(grep -E ^"[\*\ ] ${2}"$) = "" ]]
+		then
+			git pull origin main
+			git branch $2
+			git add .
+			git commit -m "ezgh : created branch ${2} and synced local repo to GitHub"
+			git push origin $2
+			exit 0
+		else
+    		echo "ezgh : a branch with that name already exists !!"
+    		exit 1
+		fi
+	fi
+fi
+
+echo "ezgh : this command was not formatted correctly"
+echo "use \"ezgh -h\" to see all possible arguments"
+exit 1
