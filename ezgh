@@ -9,8 +9,6 @@ then
 	echo "available options : "
 	echo "	-p <msg> pushes the current repo to main, with <msg> as the commit message"
 	echo "	-b <name> creates a new branch with <name> as the branche's name"
-	echo "	-r <name> <priv> creates a new repo with <name> as its name"
-	echo "	 	<priv> is the privacy setting for the repo : --private or --public"
 	exit 0
 fi
 
@@ -28,10 +26,10 @@ then
 	then
 		git branch -a | if [[ $(grep -E ^"[\*\ ] ${2}"$) = "" ]]
 		then
-			git pull
+			git pull origin main
 			git branch $2
 			git add .
-			git commit "created branch ${2} and synced local repo to GitHub"
+			git commit "ezgh : created branch ${2} and synced local repo to GitHub"
 			git push origin $2
 			exit 0
 		else
@@ -41,20 +39,6 @@ then
 	fi
 fi
 
-if [[ $# -eq 3 ]] &&[[ $1 = "-r" ]]
-then
-	git init
-	link=$(git repo create $2 $3 | tr [[:blank:]] "\n" | tail -n 1)
-	git remote add origin $link
-	git add .
-	git commit "first commit : synced local repo to GitHub"
-	git push -u origin main
-	echo "Successfully created repo \"${2}\""
-	exit 0
-fi
-
-
 echo "ezgh : this command was not formatted correctly"
 echo "use \"ezgh -h\" to see all possible arguments"
 exit 1
-
