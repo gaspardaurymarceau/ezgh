@@ -29,12 +29,12 @@ then
 			git pull origin main
 			git branch $2
 			git add .
-			git commit "ezgh : created branch ${2} and synced local repo to GitHub"
+			git commit -m "ezgh : created branch ${2} and synced local repo to GitHub"
 			git push origin $2
 			exit 0
 		else
-		echo "ezgh : a branch with that name already exists !!"
-		exit 1
+    		echo "ezgh : a branch with that name already exists !!"
+    		exit 1
 		fi
 	fi
 fi
