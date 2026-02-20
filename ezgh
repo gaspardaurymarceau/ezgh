@@ -19,6 +19,7 @@ then
 		git add .
 		git commit -m "${2}"
 		git push origin main
+		echo "Successfully pushed current repo to main !"
 		exit 0
 	fi
 
@@ -31,11 +32,12 @@ then
 			git add .
 			git commit -m "ezgh : created branch ${2} and synced local repo to GitHub"
 			git push origin $2
-			exit 0
+			echo "Successfully created branch ${2}"
 		else
     		echo "ezgh : a branch with that name already exists !!"
     		exit 1
 		fi
+	exit 0
 	fi
 fi
 
